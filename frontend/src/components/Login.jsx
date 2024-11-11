@@ -6,8 +6,15 @@ import { toast } from 'react-toastify';
 import '../styles/form.css';
 
 const Login = () => {
-  const { username, setUsername, password, setPassword, setIsLogged } =
-    useContext(UserContext); // all the states from context
+  const {
+    username,
+    setUsername,
+    password,
+    setPassword,
+    setIsLogged,
+    loading,
+    setLoading,
+  } = useContext(UserContext); // all the states from context
   const navigate = useNavigate(); // hook for navigation
 
   // Method to submit user data
@@ -15,6 +22,7 @@ const Login = () => {
     e.preventDefault();
     const newUser = { username, password };
     try {
+      setLoading(true);
       const response = await axios.post(
         'https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/login', // login api
         newUser, //new user object
@@ -29,6 +37,7 @@ const Login = () => {
       localStorage.setItem('token', response.data.token);
       setIsLogged(true);
       navigate('/dashboard');
+      setLoading(false);
     } catch (err) {
       console.error(err);
       toast.error('Incorrect username/password');
@@ -56,10 +65,9 @@ const Login = () => {
           placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          minLength={6}
         />
 
-        <button type="submit">Login</button>
+        <button type="submit">{loading ? 'Logging ...' : 'Login'}</button>
         <p className="msg">
           Don't have an account? <a href="/">Signup</a>
         </p>

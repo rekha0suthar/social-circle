@@ -29,9 +29,9 @@ const Posts = () => {
   return (
     <>
       <div className="post-container">
-        {posts.map((post) => (
-          <Post post={post} key={post._id} />
-        ))}
+        {posts.length > 0 &&
+          posts.map((post) => <Post post={post} key={post._id} />)}
+        {posts.length === 0 && <p>No Posts added</p>}
       </div>
     </>
   );

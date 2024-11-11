@@ -11,6 +11,7 @@ const UserContextProvider = ({ children }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
   return (
     <UserContext.Provider
       value={{
@@ -30,6 +31,8 @@ const UserContextProvider = ({ children }) => {
         setContent,
         posts,
         setPosts,
+        loading,
+        setLoading,
       }}
     >
       {children}

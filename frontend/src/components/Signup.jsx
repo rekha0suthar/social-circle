@@ -6,8 +6,16 @@ import { toast } from 'react-toastify';
 import '../styles/form.css';
 
 const Signup = () => {
-  const { name, setName, username, setUsername, password, setPassword } =
-    useContext(UserContext);
+  const {
+    name,
+    setName,
+    username,
+    setUsername,
+    password,
+    setPassword,
+    loading,
+    setLoading,
+  } = useContext(UserContext);
   const navigate = useNavigate(); // hook for navigation
 
   const handleForm = async (e) => {
@@ -15,6 +23,7 @@ const Signup = () => {
     const newUser = { name, username, password };
 
     try {
+      setLoading(true);
       const response = await axios.post(
         'https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/signup',
         newUser,
@@ -27,6 +36,7 @@ const Signup = () => {
 
       toast.success(response.data.msg);
       navigate('/login'); // redirect to login page
+      setLoading(false);
     } catch (err) {
       console.error(err);
       const errorMsg = err.response?.data?.msg || 'Signup failed';
@@ -61,7 +71,7 @@ const Signup = () => {
           onChange={(e) => setPassword(e.target.value)}
           minLength={6}
         />
-        <button type="submit">Signup</button>
+        <button type="submit">{loading ? 'Loading' : 'Signup'}</button>
         <p className="msg">
           Already have an account? <a href="/login">Login</a>
         </p>
