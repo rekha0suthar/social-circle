@@ -6,8 +6,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const PostEdit = () => {
-  const { title, setTitle, content, setContent, posts, setPosts } =
-    useContext(UserContext);
+  const {
+    title,
+    setTitle,
+    content,
+    setContent,
+    posts,
+    setPosts,
+    loading,
+    setLoading,
+  } = useContext(UserContext);
+
   const { id } = useParams();
   const token = localStorage.getItem('token');
 
@@ -17,6 +26,7 @@ const PostEdit = () => {
     const token = localStorage.getItem('token');
 
     try {
+      setLoading(true);
       const response = await axios.put(
         `https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/posts/${id}`,
         { title, content },
@@ -32,6 +42,7 @@ const PostEdit = () => {
       setTitle('');
       setContent('');
       navigate('/dashboard');
+      setLoading(false);
     } catch (err) {
       console.log(err);
       toast.error(err);
@@ -72,10 +83,11 @@ const PostEdit = () => {
         <textarea
           placeholder="Enter post content"
           value={content}
+          rows={5}
           onChange={(e) => setContent(e.target.value)}
         />
         <br />
-        <button type="submit">Save</button>
+        <button type="submit">{loading ? 'Saving ...' : 'Save'}</button>
       </form>
     </div>
   );

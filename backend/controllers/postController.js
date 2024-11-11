@@ -16,11 +16,24 @@ const addPost = async (req, res) => {
 };
 
 const getPosts = async (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
   try {
-    const posts = await Post.find({ user: req.user.id }).sort({
-      createdAt: -1,
-    });
-    res.status(200).json(posts);
+    //Parse page and limit as Integers
+    const pageInt = parseInt(page);
+    const limitInt = parseInt(limit);
+
+    // Calculate total posts and pages
+    const totalPosts = await Post.find({ user: req.user.id }).countDocuments();
+    const totalPages = Math.ceil(totalPosts / limitInt);
+
+    // Fetch posts with pagination
+    const posts = await Post.find({ user: req.user.id })
+      .sort({
+        createdAt: -1,
+      })
+      .skip((pageInt - 1) * limitInt) /// Skip posts for previous pages
+      .limit(limitInt); /// Limit the number of posts per page
+    res.status(200).json({ posts, totalPages, currentPage: pageInt });
   } catch (err) {
     res.status(400).json({ msg: err.message });
   }

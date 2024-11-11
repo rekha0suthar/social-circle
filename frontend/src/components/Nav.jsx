@@ -19,7 +19,7 @@ const Nav = () => {
       <h1>Socialify</h1>
       <div className="btns">
         <div className="add-blog" onClick={() => navigate('/post')}>
-          <h2>Add Blog</h2>
+          <h2>Add Post</h2>
         </div>
         <div className="logout" onClick={logout}>
           <h2>Logout</h2>

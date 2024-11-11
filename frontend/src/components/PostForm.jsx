@@ -6,29 +6,37 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const PostForm = () => {
-  const { title, setTitle, content, setContent, posts, setPosts } =
-    useContext(UserContext);
+  const {
+    title,
+    setTitle,
+    content,
+    setContent,
+    posts,
+    setPosts,
+    loading,
+    setLoading,
+  } = useContext(UserContext);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.post(
-        'https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/posts/',
-        { title, content },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      await toast.success(response.data.msg);
-      setPosts([response.data, ...posts]);
-      setTitle('');
-      setContent('');
-      navigate('/dashboard');
+      if (token) {
+        // Set token in authorization headers for future requests
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        setLoading(true);
+        const response = await axios.post(
+          'https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/posts/',
+          { title, content }
+        );
+        await toast.success(response.data.msg);
+        setPosts([response.data, ...posts]);
+        setTitle('');
+        setContent('');
+        navigate('/dashboard');
+        setLoading(false);
+      }
     } catch (err) {
       console.log(err);
       toast.error(err);
@@ -57,7 +65,7 @@ const PostForm = () => {
           onChange={(e) => setContent(e.target.value)}
           rows={5}
         />
-        <button type="submit">Save</button>
+        <button type="submit">{loading ? 'Saving ...' : 'Save'}</button>
       </form>
     </div>
   );

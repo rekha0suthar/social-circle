@@ -4,6 +4,11 @@
   background-color: black;
   color: white;
   padding: 0px 10px;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  align-items: center;
 }
 
 .add-blog:hover {
@@ -19,4 +24,14 @@
 .btns h2:hover {
   cursor: pointer;
   color: yellow;
+}
+
+@media screen and (max-width: 530px) {
+  .nav-container h1 {
+    font-size: 24px;
+  }
+
+  .btns h2 {
+    font-size: 20px;
+  }
 }

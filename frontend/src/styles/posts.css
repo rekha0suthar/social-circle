@@ -2,11 +2,18 @@
   max-width: 900px;
   margin: 50px auto;
   text-align: left;
+  margin-top: 120px !important;
 }
 
-.post-container p {
+.post-container .dummy-msg {
   text-align: center;
   font-weight: bold;
   font-size: 24px;
   margin-top: 200px;
+}
+
+@media screen and (max-width: 768px) {
+  .post-container {
+    margin: 50px 20px;
+  }
 }

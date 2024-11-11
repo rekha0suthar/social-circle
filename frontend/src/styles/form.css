@@ -20,17 +20,14 @@
 
 .form-container form input,
 .form-container form button {
-  width: 95%;
-  margin-bottom: 15px;
+  width: 100%;
+  margin-bottom: 20px;
   padding: 15px;
   border-radius: 5px;
   outline: none;
   border: 1px solid #ccc;
   font-size: 16px;
-}
-
-.form-container form button {
-  width: 100% !important;
+  box-sizing: border-box;
 }
 
 button {
@@ -47,4 +44,14 @@ button {
 
 .form-container .msg {
   margin: 0px;
+}
+
+.form-container form label {
+  font-size: 18px;
+}
+
+@media screen and (max-width: 750px) {
+  .form-container {
+    margin: 150px 20px;
+  }
 }
