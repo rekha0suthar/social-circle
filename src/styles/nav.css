@@ -1,0 +1,22 @@
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+  padding: 0px 10px;
+}
+
+.add-blog:hover {
+  cursor: pointer;
+  color: yellow;
+}
+
+.nav-container .btns {
+  display: flex;
+  gap: 30px;
+}
+
+.btns h2:hover {
+  cursor: pointer;
+  color: yellow;
+}
