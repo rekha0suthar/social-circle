@@ -18,7 +18,7 @@ const PostEdit = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5100/api/user/posts/${id}`,
+        `https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/posts/${id}`,
         { title, content },
         {
           headers: {
@@ -40,7 +40,7 @@ const PostEdit = () => {
   useEffect(() => {
     const fetchPost = async () => {
       const response = await axios.get(
-        `http://localhost:5100/api/user/posts/${id}`,
+        `https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/posts/${id}`,
         {
           headers: {
             'Content-Type': 'application/json',

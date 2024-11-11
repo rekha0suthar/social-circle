@@ -16,7 +16,7 @@ const Login = () => {
     const newUser = { username, password };
     try {
       const response = await axios.post(
-        'http://localhost:5100/api/user/login', // login api
+        'https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/login', // login api
         newUser, //new user object
         {
           headers: {
@@ -56,6 +56,7 @@ const Login = () => {
           placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          minLength={6}
         />
 
         <button type="submit">Login</button>

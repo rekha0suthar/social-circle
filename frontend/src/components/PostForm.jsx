@@ -15,7 +15,7 @@ const PostForm = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5100/api/user/posts/',
+        'https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/posts/',
         { title, content },
         {
           headers: {

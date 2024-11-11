@@ -19,7 +19,7 @@ const Post = ({ post }) => {
     if (confirmed) {
       try {
         const response = await axios.delete(
-          `http://localhost:5100/api/user/posts/${id}`,
+          `https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/posts/${id}`,
           {
             headers: {
               'Content-Type': 'application/json',

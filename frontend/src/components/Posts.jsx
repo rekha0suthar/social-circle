@@ -11,7 +11,7 @@ const Posts = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:5100/api/user/posts/',
+          'https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/posts/',
           {
             headers: {
               'Content-Type': 'application/json',
