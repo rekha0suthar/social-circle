@@ -11,14 +11,12 @@ import {
 
 const router = Router();
 
-router.post('/', auth, addPost);
+router.route('/').get(auth, getPosts).post(auth, addPost);
 
-router.get('/', auth, getPosts);
-
-router.get('/:id', auth, getPost);
-
-router.put('/:id', auth, editPost);
-
-router.delete('/:id', auth, deletePost);
+router
+  .route('/:id')
+  .get(auth, getPost)
+  .put(auth, editPost)
+  .delete(auth, deletePost);
 
 export default router;

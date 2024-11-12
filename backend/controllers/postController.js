@@ -1,5 +1,8 @@
 import Post from '../model/Post.js';
 
+// @desc    Add Post
+// @route   POST /api/user/posts/
+// @access  Private
 const addPost = async (req, res) => {
   const { title, content } = req.body;
   try {
@@ -15,6 +18,9 @@ const addPost = async (req, res) => {
   }
 };
 
+// @desc    Fetch Posts
+// @route   GET /api/user/posts/
+// @access  Private
 const getPosts = async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
   try {
@@ -39,6 +45,9 @@ const getPosts = async (req, res) => {
   }
 };
 
+// @desc    Fetch Post
+// @route   GET /api/user/posts/
+// @access  Private
 const getPost = async (req, res) => {
   const { id } = req.params;
 
@@ -55,6 +64,9 @@ const getPost = async (req, res) => {
   }
 };
 
+// @desc    Edit Post
+// @route   PUT /api/user/posts/:id
+// @access  Private
 const editPost = async (req, res) => {
   const { title, content } = req.body;
   const { id } = req.params;
@@ -78,6 +90,9 @@ const editPost = async (req, res) => {
   }
 };
 
+// @desc    Delete Post
+// @route   DELETE /api/user/posts/:id
+// @access  Private
 const deletePost = async (req, res) => {
   const { id } = req.params;
 

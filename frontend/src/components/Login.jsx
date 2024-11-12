@@ -1,52 +1,15 @@
 import React, { useContext } from 'react';
-import axios from 'axios';
 import { UserContext } from '../context/UserContext';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+
 import '../styles/form.css';
 
 const Login = () => {
-  const {
-    username,
-    setUsername,
-    password,
-    setPassword,
-    setIsLogged,
-    loading,
-    setLoading,
-  } = useContext(UserContext); // all the states from context
-  const navigate = useNavigate(); // hook for navigation
-
-  // Method to submit user data
-  const handleForm = async (e) => {
-    e.preventDefault();
-    const newUser = { username, password };
-    try {
-      setLoading(true);
-      const response = await axios.post(
-        'https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/login', // login api
-        newUser, //new user object
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      toast.success(response.data.msg);
-      localStorage.setItem('token', response.data.token);
-      setIsLogged(true);
-      navigate('/dashboard');
-      setLoading(false);
-    } catch (err) {
-      console.error(err);
-      toast.error('Incorrect username/password');
-    }
-  };
+  const { username, setUsername, password, setPassword, loading, login } =
+    useContext(UserContext); // all the states from context
 
   return (
     <div className="form-container">
-      <form onSubmit={handleForm}>
+      <form onSubmit={login}>
         <h1>Login</h1>
 
         <label>Username</label>

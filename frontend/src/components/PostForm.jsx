@@ -1,47 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import '../styles/post-form.css';
 import { UserContext } from '../context/UserContext';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 const PostForm = () => {
-  const {
-    title,
-    setTitle,
-    content,
-    setContent,
-    posts,
-    setPosts,
-    loading,
-    setLoading,
-  } = useContext(UserContext);
-  const navigate = useNavigate();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem('token');
+  const { title, setTitle, content, setContent, loading, addPost } =
+    useContext(UserContext);
 
-    try {
-      if (token) {
-        // Set token in authorization headers for future requests
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        setLoading(true);
-        const response = await axios.post(
-          'https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/posts/',
-          { title, content }
-        );
-        await toast.success(response.data.msg);
-        setPosts([response.data, ...posts]);
-        setTitle('');
-        setContent('');
-        navigate('/dashboard');
-        setLoading(false);
-      }
-    } catch (err) {
-      console.log(err);
-      toast.error(err);
-    }
-  };
   useEffect(() => {
     setTitle('');
     setContent('');
@@ -49,7 +13,7 @@ const PostForm = () => {
   return (
     <div className="post-form">
       <h2>Add Post</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={addPost}>
         <label>Title</label>
         <input
           type="text"

@@ -6,13 +6,7 @@ import { UserContext } from '../context/UserContext';
 const Nav = () => {
   const navigate = useNavigate();
 
-  const { setIsLogged } = useContext(UserContext);
-
-  const logout = () => {
-    localStorage.removeItem('token');
-    setIsLogged(false);
-    navigate('/login');
-  };
+  const { logout } = useContext(UserContext);
 
   return (
     <div className="nav-container">

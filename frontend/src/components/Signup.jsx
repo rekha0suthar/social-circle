@@ -1,8 +1,5 @@
 import React, { useContext } from 'react';
-import axios from 'axios';
 import { UserContext } from '../context/UserContext';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import '../styles/form.css';
 
 const Signup = () => {
@@ -14,39 +11,12 @@ const Signup = () => {
     password,
     setPassword,
     loading,
-    setLoading,
+    signup,
   } = useContext(UserContext);
-  const navigate = useNavigate(); // hook for navigation
-
-  const handleForm = async (e) => {
-    e.preventDefault();
-    const newUser = { name, username, password };
-
-    try {
-      setLoading(true);
-      const response = await axios.post(
-        'https://socialify-backend-rekha0suthars-projects.vercel.app/api/user/signup',
-        newUser,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      toast.success(response.data.msg);
-      navigate('/login'); // redirect to login page
-      setLoading(false);
-    } catch (err) {
-      console.error(err);
-      const errorMsg = err.response?.data?.msg || 'Signup failed';
-      toast.error(errorMsg); // show specific error message if available
-    }
-  };
 
   return (
     <div className="form-container">
-      <form onSubmit={handleForm}>
+      <form onSubmit={signup}>
         <h1>Signup</h1>
 
         <label>Name</label>
