@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 const UserContext = createContext({});
 
-const BASE_API_URL = 'http://localhost:5100/api';
-//'https://socialify-backend-rekha0suthars-projects.vercel.app/api'; // ;
+const BASE_API_URL =
+  'https://socialify-backend-rekha0suthars-projects.vercel.app/api'; // 'http://localhost:5100/api';;
 
 const UserContextProvider = ({ children }) => {
   const [name, setName] = useState('');
